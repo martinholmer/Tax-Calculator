@@ -129,8 +129,8 @@ def test_round_trip_reforms(fyear, tests_path):
     rtr_pol.implement_reform(Policy.read_json_reform(rtext))
     assert not rtr_pol.parameter_warnings
     assert not rtr_pol.errors
-    # Layer on 2022 rounding from IRS
-    reform_file = os.path.join(tests_path, '..', 'reforms', 'rounding2022.json')
+    # Layer on inflation-indexed parameter rounding "reforms"
+    reform_file = os.path.join(tests_path, '..', 'reforms', 'rounding.json')
     with open(reform_file, 'r') as rfile:
         rtext = rfile.read()
     rtr_pol.implement_reform(Policy.read_json_reform(rtext))
