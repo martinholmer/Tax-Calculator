@@ -1233,10 +1233,12 @@ class TestAdjust:
 
         np.testing.assert_allclose(pol2.CTC_c, exp)
 
+    @pytest.mark.skip
     def test_apply_cpi_offset(self):
         """
         Test applying the parameter_indexing_CPI_offset parameter
         without any other parameters.
+        NOTE: SKIP because CPI_offset parameter is no longer being used.
         """
         pol1 = Policy()
         pol1.implement_reform(
