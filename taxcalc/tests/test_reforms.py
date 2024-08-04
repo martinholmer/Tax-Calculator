@@ -73,7 +73,7 @@ def test_2017_law_reform(tests_path):
 
 
 @pytest.mark.rtr
-@pytest.mark.parametrize('fyear', [2019, 2020, 2021, 2022, 2023])
+@pytest.mark.parametrize('fyear', [2019, 2020, 2021, 2022, 2023, 2024])
 def test_round_trip_reforms(fyear, tests_path):
     """
     Check that current-law policy has the same policy parameter values in
