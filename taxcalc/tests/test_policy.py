@@ -1233,12 +1233,10 @@ class TestAdjust:
 
         np.testing.assert_allclose(pol2.CTC_c, exp)
 
-    @pytest.mark.skip
     def test_apply_cpi_offset(self):
         """
         Test applying the parameter_indexing_CPI_offset parameter
         without any other parameters.
-        NOTE: SKIP because CPI_offset parameter is no longer being used.
         """
         pol1 = Policy()
         pol1.implement_reform(
@@ -1264,16 +1262,15 @@ class TestAdjust:
 
         exp_rates = copy.deepcopy(new_rates)
         exp_rates[start_ix:] -= pol2._parameter_indexing_CPI_offset[start_ix:]
-        np.testing.assert_allclose(init_rates, exp_rates)
+        assert np.allclose(init_rates, exp_rates)
 
         # make sure values prior to 2021 were not affected.
         cmp_policy_objs(pol0, pol2, year_range=range(pol2.start_year, 2021))
 
-        pol2.set_state(year=[2022, 2023])
-        np.testing.assert_equal(
-            (pol2.EITC_c[1] / pol2.EITC_c[0] - 1).round(4),
-            (pol0.inflation_rates(year=2022) + (-0.001)).round(4),
-        )
+        pol2.set_state(year=[2023, 2024])
+        actual = (pol2.EITC_c[1][2] / pol2.EITC_c[0][2] - 1).round(4)
+        expect = (pol0.inflation_rates(year=2023) + (-0.001)).round(4)
+        assert np.allclose([actual], [expect])
 
     def test_multiple_cpi_swaps(self):
         """
