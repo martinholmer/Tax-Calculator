@@ -33,5 +33,17 @@ for yr in {25..35}; do
     fi
 done
 
+tc ../../../tmd.csv 2025 --reform qbid_repeal.json  --exact --tables --silent
+diff -q tmd-25-#-qbid_repeal-#-#.tables tmd-25-qbid_repeal.tables
+if [ $? -eq 0 ]; then
+    rm tmd-25-#-qbid_repeal-#-#.tables
+fi
+
+tc ../../../tmd.csv 2025 --reform niit_repeal.json  --exact --tables --silent
+diff -q tmd-25-#-niit_repeal-#-#.tables tmd-25-niit_repeal.tables
+if [ $? -eq 0 ]; then
+    rm tmd-25-#-niit_repeal-#-#.tables
+fi
+
 echo "Runtime: $SECONDS seconds" >&2
 exit 0
